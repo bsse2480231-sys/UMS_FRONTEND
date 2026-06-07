@@ -1,0 +1,64 @@
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { getMyCourses } from '../../api/authApi';
+import Spinner from '../../components/ui/Spinner';
+
+const StudentCoursesPage = () => {
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await getMyCourses();
+        setCourses(res.data);
+      } catch (error) {
+        toast.error('Failed to load courses');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCourses();
+  }, []);
+
+  if (loading) return <Spinner />;
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-slate-800 mb-1">My Enrolled Courses</h2>
+      <p className="text-slate-500 text-sm mb-6">Courses you are currently registered for</p>
+
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+        <table className="w-full text-left">
+          <thead className="bg-slate-50 border-b border-slate-100">
+            <tr>
+              <th className="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Code</th>
+              <th className="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Course Name</th>
+              <th className="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Semester</th>
+              <th className="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Grade</th>
+              <th className="py-3 px-6 text-xs font-semibold text-slate-500 uppercase">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-50">
+            {courses.map((c) => (
+              <tr key={c.enrollment_id} className="hover:bg-slate-50 transition-colors">
+                <td className="py-4 px-6 text-sm font-medium text-indigo-600">{c.course_code}</td>
+                <td className="py-4 px-6 text-sm text-slate-800 font-medium">{c.course_name}</td>
+                <td className="py-4 px-6 text-sm text-slate-600">{c.semester}</td>
+                <td className="py-4 px-6 text-sm font-bold text-slate-800">{c.grade || '-'}</td>
+                <td className="py-4 px-6">
+                  <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                    c.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'
+                  }`}>{c.status}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {courses.length === 0 && <p className="p-6 text-center text-slate-400 text-sm">You are not enrolled in any courses yet.</p>}
+      </div>
+    </div>
+  );
+};
+
+export default StudentCoursesPage;
