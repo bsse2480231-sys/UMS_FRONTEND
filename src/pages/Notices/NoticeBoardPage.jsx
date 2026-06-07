@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { HiOutlineSpeakerphone } from 'react-icons/hi';
-import { getNotices } from '../../api/noticeApi'; // Re-use the existing API
+import { getNotices } from '../../api/noticeApi';
 import Spinner from '../../components/ui/Spinner';
 
 const NoticeBoardPage = () => {
@@ -11,7 +11,7 @@ const NoticeBoardPage = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const res = await getNotices(); // The backend now returns filtered data based on JWT token
+        const res = await getNotices(); 
         setNotices(res.data);
       } catch (error) {
         toast.error('Failed to load notices');

@@ -28,7 +28,7 @@ const InstructorCoursesPage = () => {
       <h2 className="text-2xl font-bold text-slate-800 mb-1">My Teaching Schedule</h2>
       <p className="text-slate-500 text-sm mb-6">Courses assigned to you this semester</p>
 
-      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-x-auto">
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-slate-100">
             <tr>

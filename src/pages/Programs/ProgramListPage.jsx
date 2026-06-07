@@ -5,14 +5,14 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { HiOutlinePlusCircle, HiOutlineTrash, HiOutlinePencil } from 'react-icons/hi';
 import { getPrograms, createProgram, updateProgram, deleteProgram } from '../../api/programApi';
-import { getDepartments } from '../../api/departmentApi'; // FETCH FOR DROPDOWN
+import { getDepartments } from '../../api/departmentApi'; 
 import { programSchema } from '../../validation/programSchema';
 import Modal from '../../components/ui/Modal';
 import Spinner from '../../components/ui/Spinner';
 
 const ProgramListPage = () => {
   const [programs, setPrograms] = useState([]);
-  const [departments, setDepartments] = useState([]); // FOR DROPDOWN
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProgram, setEditingProgram] = useState(null);
@@ -91,7 +91,7 @@ const ProgramListPage = () => {
         </button>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-x-auto">
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-slate-100">
             <tr>

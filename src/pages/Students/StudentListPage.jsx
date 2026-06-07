@@ -14,7 +14,7 @@ const StudentListPage = () => {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingStudent, setEditingStudent] = useState(null); // null = Create Mode, Object = Edit Mode
+  const [editingStudent, setEditingStudent] = useState(null); 
   const [programs, setPrograms] = useState([]);
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
@@ -51,21 +51,19 @@ const StudentListPage = () => {
 
   const openCreateModal = () => {
     setEditingStudent(null);
-    // reset({ student_id: '', first_name: '', last_name: '', email: '', password: '', phone: '', current_semester: '', program_id: '' });
     reset({ first_name: '', last_name: '', email: '', password: '', phone: '', current_semester: '', program_id: '' });
     setIsModalOpen(true);
   };
 
   const openEditModal = (student) => {
     setEditingStudent(student);
-    reset({ ...student, password: '' }); // Populate form, but leave password empty
+    reset({ ...student, password: '' }); 
     setIsModalOpen(true);
   };
 
   const onSubmit = async (data) => {
     try {
       if (editingStudent) {
-        // If editing, and password is left blank, remove it from payload so backend doesn't update it
         if (!data.password) delete data.password;
         await updateStudent(editingStudent.student_id, data);
         toast.success('Student updated successfully!');
@@ -121,7 +119,7 @@ const StudentListPage = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-x-auto">
         <table className="w-full text-left">
           <thead className="bg-slate-50 border-b border-slate-100">
             <tr>

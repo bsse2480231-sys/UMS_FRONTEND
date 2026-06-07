@@ -13,7 +13,6 @@ const ProfilePage = () => {
     { label: 'Role', value: user.role },
   ];
 
-  // Role specific fields
   if (user.role === 'Student') {
     details.push(
       { label: 'Program ID', value: user.program_id },
@@ -33,7 +32,7 @@ const ProfilePage = () => {
       <h2 className="text-2xl font-bold text-slate-800 mb-1">My Profile</h2>
       <p className="text-slate-500 text-sm mb-6">Your personal university details</p>
 
-      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-x-auto">
         <div className="bg-gradient-to-r from-indigo-500 to-purple-600 h-32"></div>
         <div className="px-6 pb-6">
           <div className="flex items-end space-x-4 -mt-10">
